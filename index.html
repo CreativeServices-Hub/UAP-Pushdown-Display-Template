@@ -4,43 +4,63 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>UAP Showcase</title>
+
+  <!-- Favicon + share card -->
+  <link rel="icon" href="gkb-espn.png">
+  <meta property="og:title" content="UAP Showcase">
+  <meta property="og:description" content="All units at true pixel size. Click Open to view any unit alone.">
+  <meta property="og:image" content="gkb-espn.png">
+
   <style>
-    :root { --bg:#edeef0; --text:#0b0c10; --muted:#60646b; --gap:24px; }
+    :root { --bg:#edeef0; --text:#0b0c10; --muted:#6b7280; --gap:24px; }
     * { box-sizing:border-box; }
     html, body { margin:0; background:var(--bg); color:var(--text);
       font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; }
 
-    /* Header */
-    header { padding:28px var(--gap) 18px; text-align:left; }
-    .brandline { display:flex; align-items:center; justify-content:flex-start; gap:18px; flex-wrap:wrap; }
-    .brandline img.logo-lockup { height:120px; width:auto; display:block; }
-    .brandline h1 { margin:0; font-size:48px; line-height:1.1; font-weight:800; letter-spacing:.2px; }
-    .subline { margin:10px 0 0; color:var(--muted); font-size:16px; text-align:left; }
+    /* Header (subtle divider, tighter logo, hero title) */
+    header { background:#fff; border-bottom:1px solid #e5e7eb; padding:24px 36px 18px; text-align:left; }
+    .brandline { display:flex; align-items:center; justify-content:flex-start; gap:14px; flex-wrap:wrap; }
+    .brandline img.logo-lockup { height:90px; width:auto; display:block; }
+    .brandline h1 { margin:0; font-family:"Century Gothic","AppleGothic",sans-serif; font-size:56px; line-height:1.1; letter-spacing:.2px; font-weight:800; }
+    .subline { margin:6px 0 0; color:var(--muted); font-size:15px; }
 
-    /* Layout */
-    .page { padding:0 var(--gap) 60px; }
+    /* Quick nav */
+    nav.quick { padding:10px 36px 0; font-size:14px; color:var(--muted); }
+    nav.quick a { color:inherit; text-decoration:none; border-bottom:1px solid transparent; padding-bottom:1px; }
+    nav.quick a:hover { border-color:currentColor; }
+
+    /* Page + column */
+    .page { padding:0 36px 80px; }
     .col { display:flex; flex-direction:column; gap:24px; width:max-content; }
+
     .stack { display:flex; flex-direction:column; gap:16px; }
     .card { width:max-content; }
-    iframe { display:block; border:0; overflow:hidden; background:#000; }
+    .label { font-size:12px; color:var(--muted); margin:8px 0 -8px; }
+    iframe { display:block; border:0; overflow:hidden; background:#0a0a0a; }
 
-    /* Buttons */
-    .btn { appearance:none; border:1px solid #000; background:#000; color:#fff;
-      border-radius:999px; padding:8px 14px; font-size:12px; text-decoration:none; cursor:pointer;
-      transition:opacity .15s ease, transform .05s ease; white-space:nowrap; }
-    .btn:hover { opacity:.9; } .btn:active { transform:translateY(1px); }
+    /* Buttons (bolder + tactile) */
+    .btn {
+      appearance:none; border:2px solid #000; background:#000; color:#fff;
+      border-radius:999px; padding:10px 16px; font-size:13px; text-decoration:none; cursor:pointer;
+      transition:transform .08s ease, opacity .15s ease; white-space:nowrap;
+    }
+    .btn:hover { transform:translateY(-1px); opacity:1; }
+    .btn:active { transform:translateY(0); }
 
     /* Button rows + separators */
-    .open-row { display:block; margin:30px 0; }          /* 30px above/below */
-    .sep { height:3px; background:#000; margin:30px 0; } /* 3px line, same spacing */
+    .open-row { display:block; margin:30px 0; }         /* 30px above/below */
+    .sep { height:3px; background:#111; margin:34px 0; opacity:.9; } /* 3px line with rhythm */
 
-    /* Fixed widths for lines */
-    .w-1280 { width:1280px; } .w-970 { width:970px; } .w-728 { width:728px; } .w-320 { width:320px; }
+    /* Fixed widths so lines match unit widths */
+    .w-1280 { width:1280px; }
+    .w-970  { width:970px; }
+    .w-728  { width:728px; }
+    .w-320  { width:320px; }
 
-    /* Powered by */
-    .powered-footer { margin-top:60px; display:flex; align-items:center; justify-content:flex-start; gap:10px; width:100%; }
-    .powered-footer span { color:var(--muted); font-size:18px; font-weight:500; }
-    .powered-footer img.brandworks { height:180px; width:auto; display:block; }
+    /* Footer */
+    .powered-footer { margin-top:80px; display:flex; align-items:center; justify-content:flex-start; gap:12px; opacity:.9; }
+    .powered-footer span { color:var(--muted); font-size:16px; font-weight:500; }
+    .powered-footer img.brandworks { height:150px; width:auto; display:block; }
   </style>
 </head>
 <body>
@@ -52,17 +72,30 @@
     <p class="subline">Open to view any unit alone in a new tab.</p>
   </header>
 
+  <!-- Quick jump links -->
+  <nav class="quick">
+    Jump to:
+    <a href="#s1280x418">1280×418</a> ·
+    <a href="#s1280x100">1280×100</a> ·
+    <a href="#s970x250">970×250</a> ·
+    <a href="#s970x66">970×66</a> ·
+    <a href="#s728x250">728×250</a> ·
+    <a href="#s728x90">728×90</a> ·
+    <a href="#s320x250">320×250</a> ·
+    <a href="#s320x50">320×50</a> ·
+    <a href="#s300x250">300×250</a>
+  </nav>
+
   <div class="page">
     <div class="col" id="units"><!-- JS injects units here --></div>
 
-    <!-- Powered by -->
     <div class="powered-footer">
       <span>powered by</span>
       <img class="brandworks" src="brandworks.png" alt="Brandworks" />
     </div>
   </div>
 
-  <!-- Dynamic title + robust loader with true cache-busting for all assets -->
+  <!-- Dynamic title + robust loader with cache-busting -->
   <script>
   (function setTitle() {
     const params = new URLSearchParams(location.search);
@@ -74,55 +107,44 @@
 
     const parts = location.pathname.split('/').filter(Boolean);
     let repo = '';
-    if (location.hostname.endsWith('.github.io')) {
-      // username.github.io/<repo>/...
-      repo = parts[0] || '';
-    } else {
-      // /<owner>/<repo>/...
-      repo = parts[1] || parts[0] || '';
-    }
+    if (location.hostname.endsWith('.github.io')) { repo = parts[0] || ''; } else { repo = parts[1] || parts[0] || ''; }
     if (repo) {
-      const cleaned = repo
-        .replace(/^UAP[-–]\s*/i, '')
-        .replace(/^UAP-Display[-–]\s*/i, '')
-        .replace(/[-_]/g, ' ')
-        .trim();
+      const cleaned = repo.replace(/^UAP[-–]\s*/i,'')
+                          .replace(/^UAP-Display[-–]\s*/i,'')
+                          .replace(/[-_]/g,' ')
+                          .trim();
       if (cleaned) { h1.textContent = cleaned; document.title = cleaned; }
     }
   })();
 
-  // Units (order/layout we agreed)
+  // Units in agreed order; 'sep' true only for second item in each pair (and 320x50)
   const UNITS = [
-    { dir:'1280x418', w:1280, h:418, label:'1280×418', sep:false },
-    { dir:'1280x100', w:1280, h:100, label:'1280×100', sep:true  },
+    { id:'s1280x418', dir:'1280x418', w:1280, h:418, label:'1280×418', sep:false },
+    { id:'s1280x100', dir:'1280x100', w:1280, h:100, label:'1280×100', sep:true  },
 
-    { dir:'970x250',  w:970,  h:250, label:'970×250',  sep:false },
-    { dir:'970x66',   w:970,  h:66,  label:'970×66',   sep:true  },
+    { id:'s970x250',  dir:'970x250',  w:970,  h:250, label:'970×250',  sep:false },
+    { id:'s970x66',   dir:'970x66',   w:970,  h:66,  label:'970×66',   sep:true  },
 
-    { dir:'728x250',  w:728,  h:250, label:'728×250',  sep:false },
-    { dir:'728x90',   w:728,  h:90,  label:'728×90',   sep:true  },
+    { id:'s728x250',  dir:'728x250',  w:728,  h:250, label:'728×250',  sep:false },
+    { id:'s728x90',   dir:'728x90',   w:728,  h:90,  label:'728×90',   sep:true  },
 
-    { dir:'320x250',  w:320,  h:250, label:'320×250',  sep:false },
-    { dir:'320x50',   w:320,  h:50,  label:'320×50',   sep:true  },
+    { id:'s320x250',  dir:'320x250',  w:320,  h:250, label:'320×250',  sep:false },
+    { id:'s320x50',   dir:'320x50',   w:320,  h:50,  label:'320×50',   sep:true  },
 
-    { dir:'300x250',  w:300,  h:250, label:'300×250',  sep:false }
+    { id:'s300x250',  dir:'300x250',  w:300,  h:250, label:'300×250',  sep:false }
   ];
 
-  // Fallback filename patterns inside each folder
+  // Only accept <dir>/<dir>.html or i<dir>.html (avoid stray index.html)
   function candidateFiles(dir) {
     return [
-      `uaps/${dir}/${dir}.html`,  // 320x250/320x250.html
-      `uaps/${dir}/index.html`,   // 320x250/index.html
-      `uaps/${dir}/i${dir}.html`  // 320x250/i320x250.html
+      `uaps/${dir}/${dir}.html`,
+      `uaps/${dir}/i${dir}.html`
     ];
   }
 
   async function pickFirstExisting(urls) {
     for (const url of urls) {
-      try {
-        const r = await fetch(url, { method:'HEAD', cache:'no-store' });
-        if (r.ok) return url;
-      } catch {}
+      try { const r = await fetch(url, { method:'HEAD', cache:'no-store' }); if (r.ok) return url; } catch {}
     }
     return null;
   }
@@ -137,52 +159,65 @@
 
   async function build() {
     const root = document.getElementById('units');
-    // Partner-specific cache key: repo name + timestamp to obliterate stale CDN entries
     const parts = location.pathname.split('/').filter(Boolean);
     const repoKey = (location.hostname.endsWith('.github.io') ? (parts[0]||'') : (parts[1]||parts[0]||''));
-    const v = `${repoKey}-${Date.now()}`;
+    const v = `${repoKey}-${Date.now()}`; // cache-buster for page session
 
     for (const u of UNITS) {
       const stack = document.createElement('div');
       stack.className = 'stack';
+      stack.id = u.id;
 
       const card = document.createElement('div');
       card.className = 'card';
 
-      // Resolve actual file
+      // Label above unit for clarity
+      const label = document.createElement('div');
+      label.className = 'label';
+      label.textContent = u.label;
+      card.appendChild(label);
+
+      // Resolve creative file
       const srcBase = await pickFirstExisting(candidateFiles(u.dir));
 
-      // Load HTML text with no-store, inject <base href="...?..."> so ALL relative assets get cache-busted
+      // Load HTML with no-store, inject <base href="...?..."> so all relative assets use cache-busted URL
       const iframe = document.createElement('iframe');
       iframe.width = u.w; iframe.height = u.h; iframe.scrolling = 'no';
 
       if (srcBase) {
         try {
-          const res = await fetch(srcBase, { cache: 'no-store' });
+          const res = await fetch(srcBase, { cache:'no-store' });
           const html = await res.text();
           const base = `<base href="${srcBase}?v=${v}">`;
           iframe.srcdoc = `${base}\n${html}`;
         } catch {
-          // fallback: direct src with cache-buster (still helps for plain HTML)
           iframe.src = `${srcBase}?v=${v}`;
         }
       }
       card.appendChild(iframe);
 
-      // Open button (links to file with cache-buster)
+      // Fallback visual if something truly fails to load after a moment
+      setTimeout(() => {
+        try {
+          if (!iframe.contentWindow || !iframe.contentWindow.document) {
+            iframe.style.background = "#f3f4f6";
+          }
+        } catch {}
+      }, 2000);
+
+      // Open button
       const openRow = document.createElement('div');
       openRow.className = `open-row ${widthClass(u.w)}`;
       const a = document.createElement('a');
-      a.className = 'btn';
-      a.target = '_blank'; a.rel = 'noopener';
+      a.className = 'btn'; a.target = '_blank'; a.rel = 'noopener';
       a.textContent = `Open ${u.label}`;
       a.href = `${(srcBase || candidateFiles(u.dir)[0])}?v=${v}`;
       openRow.appendChild(a);
-      card.appendChild(openRow);
 
+      card.appendChild(openRow);
       stack.appendChild(card);
 
-      // Separator only under the smaller unit in each pair
+      // Separator only for second item in each pair (and 320×50)
       if (u.sep) {
         const sep = document.createElement('div');
         sep.className = `sep ${widthClass(u.w)}`;
