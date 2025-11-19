@@ -8,22 +8,29 @@
     :root { --bg:#edeef0; --text:#0b0c10; --muted:#60646b; --gap:24px; }
     * { box-sizing:border-box; }
     html, body {
-      margin:0; background:var(--bg); color:var(--text);
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
       font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
     }
 
+    /* Header */
     header { padding:28px var(--gap) 18px; text-align:left; }
-    .brandline { display:flex; align-items:center; justify-content:flex-start; gap:18px; flex-wrap:wrap; }
+    .brandline {
+      display:flex; align-items:center; justify-content:flex-start; gap:18px; flex-wrap:wrap;
+    }
     .brandline img.logo-lockup { height:120px; width:auto; display:block; }
     .brandline h1 { margin:0; font-size:48px; line-height:1.1; font-weight:800; letter-spacing:.2px; }
     .subline { margin:10px 0 0; color:var(--muted); font-size:16px; text-align:left; }
 
+    /* Layout */
     .page { padding:0 var(--gap) 60px; }
     .col { display:flex; flex-direction:column; gap:24px; width:max-content; }
     .stack { display:flex; flex-direction:column; gap:16px; }
     .card { width:max-content; }
     iframe { display:block; border:0; overflow:hidden; background:#000; }
 
+    /* Buttons */
     .btn {
       appearance:none; border:1px solid #000; background:#000; color:#fff;
       border-radius:999px; padding:8px 14px; font-size:12px; text-decoration:none; cursor:pointer;
@@ -32,13 +39,19 @@
     .btn:hover { opacity:.9; }
     .btn:active { transform:translateY(1px); }
 
+    /* Button rows + lines */
     .open-row { display:block; margin:30px 0; }
     .sep { height:3px; background:#000; margin:30px 0; }
 
-    .w-1280 { width:1280px; } .w-970{width:970px;} .w-728{width:728px;} .w-320{width:320px;}
+    .w-1280 { width:1280px; }
+    .w-970  { width:970px; }
+    .w-728  { width:728px; }
+    .w-320  { width:320px; }
 
+    /* Powered by */
     .powered-footer {
-      margin-top:60px; display:flex; align-items:center; justify-content:flex-start; gap:10px; width:100%;
+      margin-top:60px;
+      display:flex; align-items:center; justify-content:flex-start; gap:10px; width:100%;
     }
     .powered-footer span { color:var(--muted); font-size:18px; font-weight:500; }
     .powered-footer img.brandworks { height:180px; width:auto; display:block; }
@@ -60,111 +73,4 @@
       <div class="stack">
         <div class="card">
           <iframe src="uaps/1280x418/1280x418.html" width="1280" height="418" scrolling="no"></iframe>
-          <div class="open-row w-1280">
-            <a class="btn" href="uaps/1280x418/1280x418.html" target="_blank">Open 1280×418</a>
-          </div>
-        </div>
-
-        <div class="card">
-          <iframe src="uaps/1280x100/1280x100.html" width="1280" height="100" scrolling="no"></iframe>
-          <div class="open-row w-1280">
-            <a class="btn" href="uaps/1280x100/1280x100.html" target="_blank">Open 1280×100</a>
-          </div>
-          <div class="sep w-1280"></div>
-        </div>
-      </div>
-
-      <!-- 970 pair -->
-      <div class="stack">
-        <div class="card">
-          <iframe src="uaps/970x250/970x250.html" width="970" height="250" scrolling="no"></iframe>
-          <div class="open-row w-970">
-            <a class="btn" href="uaps/970x250/970x250.html" target="_blank">Open 970×250</a>
-          </div>
-        </div>
-
-        <div class="card">
-          <iframe src="uaps/970x66/970x66.html" width="970" height="66" scrolling="no"></iframe>
-          <div class="open-row w-970">
-            <a class="btn" href="uaps/970x66/970x66.html" target="_blank">Open 970×66</a>
-          </div>
-          <div class="sep w-970"></div>
-        </div>
-      </div>
-
-      <!-- 728 pair -->
-      <div class="stack">
-        <div class="card">
-          <iframe src="uaps/728x250/728x250.html" width="728" height="250" scrolling="no"></iframe>
-          <div class="open-row w-728">
-            <a class="btn" href="uaps/728x250/728x250.html" target="_blank">Open 728×250</a>
-          </div>
-        </div>
-
-        <div class="card">
-          <iframe src="uaps/728x90/728x90.html" width="728" height="90" scrolling="no"></iframe>
-          <div class="open-row w-728">
-            <a class="btn" href="uaps/728x90/728x90.html" target="_blank">Open 728×90</a>
-          </div>
-          <div class="sep w-728"></div>
-        </div>
-      </div>
-
-      <!-- 320 pair -->
-      <div class="stack">
-        <div class="card">
-          <iframe src="uaps/320x250/320x250.html" width="320" height="250" scrolling="no"></iframe>
-          <div class="open-row w-320">
-            <a class="btn" href="uaps/320x250/320x250.html" target="_blank">Open 320×250</a>
-          </div>
-        </div>
-
-        <div class="card">
-          <iframe src="uaps/320x50/320x50.html" width="320" height="50" scrolling="no"></iframe>
-          <div class="open-row w-320">
-            <a class="btn" href="uaps/320x50/320x50.html" target="_blank">Open 320×50</a>
-          </div>
-          <div class="sep w-320"></div>
-        </div>
-      </div>
-
-      <!-- 300x250 -->
-      <div class="card">
-        <iframe src="uaps/300x250/300x250.html" width="300" height="250" scrolling="no"></iframe>
-        <div class="open-row" style="width:300px;">
-          <a class="btn" href="uaps/300x250/300x250.html" target="_blank">Open 300×250</a>
-        </div>
-      </div>
-
-      <!-- Powered by -->
-      <div class="powered-footer">
-        <span>powered by</span>
-        <img class="brandworks" src="brandworks.png" alt="Brandworks" />
-      </div>
-    </div>
-  </div>
-
-  <!-- Auto-title script -->
-  <script>
-  (function() {
-    const params = new URLSearchParams(location.search);
-    const fromQuery = params.get('title');
-    const h1 = document.getElementById('dynamicTitle');
-    if (!h1) return;
-
-    if (fromQuery) { h1.textContent = decodeURIComponent(fromQuery); document.title = fromQuery; return; }
-
-    const pathParts = location.pathname.split('/').filter(Boolean);
-    const repoName = pathParts[1] || '';
-    if (repoName) {
-      const cleaned = repoName
-        .replace(/^UAP[-–]\s*/i, '')
-        .replace(/^UAP-Display[-–]\s*/i, '')
-        .replace(/[-_]/g, ' ')
-        .trim();
-      if (cleaned) { h1.textContent = cleaned; document.title = cleaned; }
-    }
-  })();
-  </script>
-</body>
-</html>
+          <d
