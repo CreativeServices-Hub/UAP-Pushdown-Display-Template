@@ -7,10 +7,8 @@
   <style>
     :root { --bg:#edeef0; --text:#0b0c10; --muted:#60646b; --gap:24px; }
     * { box-sizing:border-box; }
-    html, body {
-      margin:0; background:var(--bg); color:var(--text);
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
-    }
+    html, body { margin:0; background:var(--bg); color:var(--text);
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; }
 
     /* Header */
     header { padding:28px var(--gap) 18px; text-align:left; }
@@ -27,28 +25,20 @@
     iframe { display:block; border:0; overflow:hidden; background:#000; }
 
     /* Buttons */
-    .btn {
-      appearance:none; border:1px solid #000; background:#000; color:#fff;
+    .btn { appearance:none; border:1px solid #000; background:#000; color:#fff;
       border-radius:999px; padding:8px 14px; font-size:12px; text-decoration:none; cursor:pointer;
-      transition:opacity .15s ease, transform .05s ease; white-space:nowrap;
-    }
-    .btn:hover { opacity:.9; }
-    .btn:active { transform:translateY(1px); }
+      transition:opacity .15s ease, transform .05s ease; white-space:nowrap; }
+    .btn:hover { opacity:.9; } .btn:active { transform:translateY(1px); }
 
     /* Button rows + separators */
     .open-row { display:block; margin:30px 0; }          /* 30px above/below */
-    .sep { height:3px; background:#000; margin:30px 0; } /* 3px line with same spacing */
+    .sep { height:3px; background:#000; margin:30px 0; } /* 3px line, same spacing */
 
     /* Fixed widths for lines */
-    .w-1280 { width:1280px; }
-    .w-970  { width:970px; }
-    .w-728  { width:728px; }
-    .w-320  { width:320px; }
+    .w-1280 { width:1280px; } .w-970 { width:970px; } .w-728 { width:728px; } .w-320 { width:320px; }
 
     /* Powered by */
-    .powered-footer {
-      margin-top:60px; display:flex; align-items:center; justify-content:flex-start; gap:10px; width:100%;
-    }
+    .powered-footer { margin-top:60px; display:flex; align-items:center; justify-content:flex-start; gap:10px; width:100%; }
     .powered-footer span { color:var(--muted); font-size:18px; font-weight:500; }
     .powered-footer img.brandworks { height:180px; width:auto; display:block; }
   </style>
@@ -72,7 +62,7 @@
     </div>
   </div>
 
-  <!-- Dynamic title + robust loader with cache-busting -->
+  <!-- Dynamic title + robust loader with true cache-busting for all assets -->
   <script>
   (function setTitle() {
     const params = new URLSearchParams(location.search);
@@ -80,10 +70,7 @@
     const h1 = document.getElementById('dynamicTitle');
     if (!h1) return;
 
-    if (fromQuery) {
-      const t = decodeURIComponent(fromQuery);
-      h1.textContent = t; document.title = t; return;
-    }
+    if (fromQuery) { const t = decodeURIComponent(fromQuery); h1.textContent = t; document.title = t; return; }
 
     const parts = location.pathname.split('/').filter(Boolean);
     let repo = '';
@@ -94,7 +81,6 @@
       // /<owner>/<repo>/...
       repo = parts[1] || parts[0] || '';
     }
-
     if (repo) {
       const cleaned = repo
         .replace(/^UAP[-–]\s*/i, '')
@@ -105,7 +91,7 @@
     }
   })();
 
-  // Agreed order/layout
+  // Units (order/layout we agreed)
   const UNITS = [
     { dir:'1280x418', w:1280, h:418, label:'1280×418', sep:false },
     { dir:'1280x100', w:1280, h:100, label:'1280×100', sep:true  },
@@ -122,7 +108,7 @@
     { dir:'300x250',  w:300,  h:250, label:'300×250',  sep:false }
   ];
 
-  // Try common filenames inside each size folder
+  // Fallback filename patterns inside each folder
   function candidateFiles(dir) {
     return [
       `uaps/${dir}/${dir}.html`,  // 320x250/320x250.html
@@ -151,7 +137,10 @@
 
   async function build() {
     const root = document.getElementById('units');
-    const v = Date.now().toString(); // cache-buster
+    // Partner-specific cache key: repo name + timestamp to obliterate stale CDN entries
+    const parts = location.pathname.split('/').filter(Boolean);
+    const repoKey = (location.hostname.endsWith('.github.io') ? (parts[0]||'') : (parts[1]||parts[0]||''));
+    const v = `${repoKey}-${Date.now()}`;
 
     for (const u of UNITS) {
       const stack = document.createElement('div');
@@ -160,15 +149,27 @@
       const card = document.createElement('div');
       card.className = 'card';
 
-      // Resolve the correct file (first that exists)
+      // Resolve actual file
       const srcBase = await pickFirstExisting(candidateFiles(u.dir));
 
+      // Load HTML text with no-store, inject <base href="...?..."> so ALL relative assets get cache-busted
       const iframe = document.createElement('iframe');
       iframe.width = u.w; iframe.height = u.h; iframe.scrolling = 'no';
-      if (srcBase) iframe.src = `${srcBase}?v=${v}`;
+
+      if (srcBase) {
+        try {
+          const res = await fetch(srcBase, { cache: 'no-store' });
+          const html = await res.text();
+          const base = `<base href="${srcBase}?v=${v}">`;
+          iframe.srcdoc = `${base}\n${html}`;
+        } catch {
+          // fallback: direct src with cache-buster (still helps for plain HTML)
+          iframe.src = `${srcBase}?v=${v}`;
+        }
+      }
       card.appendChild(iframe);
 
-      // Open button
+      // Open button (links to file with cache-buster)
       const openRow = document.createElement('div');
       openRow.className = `open-row ${widthClass(u.w)}`;
       const a = document.createElement('a');
