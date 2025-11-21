@@ -215,9 +215,8 @@ if (reversed == null) { reversed = false; }
 	// Layer_5
 	this.instance_7 = new lib._1280x100();
 	this.instance_7.setTransform(0,0,0.7578,0.758);
-	this.instance_7._off = true;
 
-	this.timeline.addTween(cjs.Tween.get(this.instance_7).wait(139).to({_off:false},0).wait(101));
+	this.timeline.addTween(cjs.Tween.get(this.instance_7).wait(240));
 
 	this._renderFirstFrame();
 
